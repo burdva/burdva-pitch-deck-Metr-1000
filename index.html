@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burdva Limited - GM1000 Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Title Slide */
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-slide .subtitle {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .title-slide .tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Section Headers */
+        .section-slide {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+
+        .section-slide h2 {
+            font-size: 4rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Problem Slide */
+        .problem-slide {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .problem-list {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .problem-list li {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            padding-left: 60px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .problem-list li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            font-size: 2rem;
+        }
+
+        /* Solution Slide */
+        .solution-slide {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        .solution-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Market Slide */
+        .market-slide {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Business Model Slide */
+        .model-slide {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        }
+
+        .business-models {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .model-card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .model-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .model-card .revenue {
+            font-size: 2rem;
+            color: #ffd700;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        /* Product Slide */
+        .product-slide {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+            align-items: center;
+        }
+
+        .product-specs {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .spec-item {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #ffd700;
+        }
+
+        /* Financial Projections Slide */
+        .financial-slide {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+        }
+
+        .financial-table {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .financial-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .financial-table th,
+        .financial-table td {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .financial-table th {
+            background: rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .financial-table tr:nth-child(even) {
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Competition Slide */
+        .competition-slide {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+        }
+
+        .competitive-matrix {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .matrix-cell {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .matrix-header {
+            background: rgba(255,215,0,0.8);
+            color: #000;
+            font-weight: 600;
+        }
+
+        .check {
+            color: #2ecc71;
+            font-size: 1.5rem;
+        }
+
+        .cross {
+            color: #e74c3c;
+            font-size: 1.5rem;
+        }
+
+        /* Team Slide */
+        .team-slide {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .team-member .role {
+            color: #ffd700;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Funding Slide */
+        .funding-slide {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        }
+
+        .funding-rounds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .funding-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .funding-amount {
+            font-size: 2.5rem;
+            color: #ffd700;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .funding-use {
+            list-style: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .funding-use li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .funding-use li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+
+        /* Thank You Slide */
+        .thank-you-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+        }
+
+        .thank-you-slide h2 {
+            font-size: 5rem;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            font-size: 1.5rem;
+            margin-top: 40px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .title-slide h1 {
+                font-size: 3rem;
+            }
+            
+            .section-slide h2 {
+                font-size: 2.5rem;
+            }
+            
+            .business-models,
+            .product-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide title-slide">
+        <div class="container">
+            <h1>Burdva Limited</h1>
+            <div class="subtitle">GM1000 Smart Gas Cylinder Tracker</div>
+            <div class="tagline">
+                Revolutionizing gas cylinder management in Nigeria through IoT innovation
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Problem -->
+    <div class="slide problem-slide">
+        <div class="container">
+            <h2>The Problem</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">
+                Nigerian households face critical challenges with gas cylinder management
+            </p>
+            <ul class="problem-list">
+                <li>Gas shortage unpredictability - 65% of households experience frequent shortages</li>
+                <li>Price volatility - Cylinder costs rose from ₦18,000 to ₦25,000+ in 2024</li>
+                <li>No visibility into gas levels leading to emergency purchases at higher prices</li>
+                <li>Safety concerns - gas leaks and cylinder explosions due to poor monitoring</li>
+                <li>Manual tracking - no digital solution for consumption and refill planning</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: Solution -->
+    <div class="slide solution-slide">
+        <div class="container">
+            <h2>Our Solution: GM1000</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 20px;">
+                IoT-enabled smart tracking device with real-time monitoring
+            </p>
+            <div class="solution-features">
+                <div class="feature-card">
+                    <h3>📊 Real-time Monitoring</h3>
+                    <p>Continuous tracking of gas levels with 95% accuracy using ultrasonic sensors</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔔 Smart Alerts</h3>
+                    <p>Automated notifications when gas is low, refill reminders, and safety warnings</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Mobile App</h3>
+                    <p>User-friendly app for monitoring, consumption analytics, and refill scheduling</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛡️ Safety Features</h3>
+                    <p>Leak detection, temperature monitoring, and emergency alerts for enhanced safety</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📈 Usage Analytics</h3>
+                    <p>Detailed consumption patterns to optimize gas usage and budgeting</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤝 Partner Integration</h3>
+                    <p>Seamless integration with gas suppliers for automated refill services</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Market Opportunity -->
+    <div class="slide market-slide">
+        <div class="container">
+            <h2>Massive Market Opportunity</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">
+                Nigeria's growing LPG market with increasing smart home adoption
+            </p>
+            <div class="market-stats">
+                <div class="stat-card">
+                    <div class="stat-number">8M</div>
+                    <div class="stat-label">Households Using LPG</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₦284.6M</div>
+                    <div class="stat-label">Smart Home Market 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Urban Interest in Smart Tech</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8M tons</div>
+                    <div class="stat-label">LPG Demand by 2028</div>
+                </div>
+            </div>
+            <p style="font-size: 1.3rem; text-align: center; margin-top: 40px; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px;">
+                <strong>TAM:</strong> 4.8M households (60% of urban LPG users interested in smart technology)<br>
+                <strong>SAM:</strong> 1-2M households (conservative target market)
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Business Model -->
+    <div class="slide model-slide">
+        <div class="container">
+            <h2>Dual Revenue Streams</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">
+                Both B2C and B2B2C models for maximum market penetration
+            </p>
+            <div class="business-models">
+                <div class="model-card">
+                    <h3>🏠 Direct to Consumer (B2C)</h3>
+                    <div class="revenue">₦92,000 per customer/year</div>
+                    <p><strong>Hardware:</strong> ₦80,000 one-time</p>
+                    <p><strong>Subscription:</strong> ₦12,000/year</p>
+                    <p style="margin-top: 20px;"><strong>Target:</strong> Individual households seeking smart gas management</p>
+                </div>
+                <div class="model-card">
+                    <h3>🏢 B2B2C Partnership Model</h3>
+                    <div class="revenue">₦53,000 per customer/year</div>
+                    <p><strong>Hardware:</strong> ₦45,000 (volume pricing)</p>
+                    <p><strong>Platform:</strong> ₦8,000/year per customer</p>
+                    <p style="margin-top: 20px;"><strong>Target:</strong> Gas distribution companies wanting to add value to their customers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Product Details -->
+    <div class="slide product-slide">
+        <div class="container">
+            <h2>GM1000 Product Specifications</h2>
+            <div class="product-details">
+                <div class="product-specs">
+                    <h3 style="color: #ffd700; margin-bottom: 30px;">Technical Features</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Cost per Unit:</span> ₦30,000-50,000
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Battery Life:</span> 18-24 months
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Connectivity:</span> WiFi + 4G LTE
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Accuracy:</span> 95% level detection
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Safety Alerts:</span> Real-time leak detection
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">App Features:</span> Consumption tracking, refill alerts, analytics
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Installation:</span> Magnetic mount, 5-minute setup
+                    </div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px);">
+                    <h3 style="color: #ffd700; margin-bottom: 20px;">Key Benefits</h3>
+                    <ul style="font-size: 1.2rem; line-height: 2;">
+                        <li>Save up to 25% on gas costs through optimized usage</li>
+                        <li>Eliminate emergency gas purchases</li>
+                        <li>Enhanced safety with early leak detection</li>
+                        <li>Peace of mind with 24/7 monitoring</li>
+                        <li>Integration with gas supplier delivery networks</li>
+                        <li>Data-driven insights for better budgeting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Financial Projections -->
+    <div class="slide financial-slide">
+        <div class="container">
+            <h2>5-Year Financial Projections</h2>
+            <p style="font-size: 1.3rem; text-align: center; margin-bottom: 30px;">
+                Strong growth trajectory with improving unit economics
+            </p>
+            <div class="financial-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                            <th>Year 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Units Sold</strong></td>
+                            <td>1,000</td>
+                            <td>5,000</td>
+                            <td>15,000</td>
+                            <td>75,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hardware Revenue</strong></td>
+                            <td>₦80M</td>
+                            <td>₦375M</td>
+                            <td>₦1.05B</td>
+                            <td>₦4.5B</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Subscription Revenue</strong></td>
+                            <td>₦9.6M</td>
+                            <td>₦72M</td>
+                            <td>₦252M</td>
+                            <td>₦1.57B</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Revenue</strong></td>
+                            <td>₦89.6M</td>
+                            <td>₦447M</td>
+                            <td>₦1.3B</td>
+                            <td>₦6.07B</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gross Margin</strong></td>
+                            <td>44.2%</td>
+                            <td>55.3%</td>
+                            <td>59.7%</td>
+                            <td>63.0%</td>
+                        </tr>
+                        <tr style="background: rgba(255,215,0,0.2); font-weight: 600;">
+                            <td><strong>Annual Growth</strong></td>
+                            <td>-</td>
+                            <td>400%</td>
+                            <td>200%</td>
+                            <td>150%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 1.2rem; text-align: center; margin-top: 30px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                <strong>Break-even:</strong> Month 8 | <strong>LTV/CAC:</strong> 4:1 | <strong>Customer Payback:</strong> 18 months
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Competitive Advantage -->
+    <div class="slide competition-slide">
+        <div class="container">
+            <h2>Competitive Landscape</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">
+                First-mover advantage in Nigerian smart gas tracking market
+            </p>
+            <div class="competitive-matrix">
+                <div class="matrix-grid">
+                    <div class="matrix-cell matrix-header">Feature</div>
+                    <div class="matrix-cell matrix-header">Burdva GM1000</div>
+                    <div class="matrix-cell matrix-header">Traditional Methods</div>
+                    
+                    <div class="matrix-cell">Real-time Monitoring</div>
+                    <div class="matrix-cell"><span class="check">✓</span> 24/7 tracking</div>
+                    <div class="matrix-cell"><span class="cross">✗</span> Manual checking</div>
+                    
+                    <div class="matrix-cell">Smart Alerts</div>
+                    <div class="matrix-cell"><span class="check">✓</span> Automated notifications</div>
+                    <div class="matrix-cell"><span class="cross">✗</span> No alerts</div>
+                    
+                    <div class="matrix-cell">Safety Features</div>
+                    <div class="matrix-cell"><span class="check">✓</span> Leak detection</div>
+                    <div class="matrix-cell"><span class="cross">✗</span> Basic cylinders only</div>
+                    
+                    <div class="matrix-cell">Mobile App</div>
+                    <div class="matrix-cell"><span class="check">✓</span> Full IoT platform</div>
+                    <div class="matrix-cell"><span class="cross">✗</span> Not available</div>
+                    
+                    <div class="matrix-cell">Subscription Model</div>
+                    <div class="matrix-cell"><span class="check">✓</span> Value-added services</div>
+                    <div class="matrix-cell"><span class="cross">✗</span> One-time purchase</div>
+                    
+                    <div class="matrix-cell">Local Partnership</div>
+                    <div class="matrix-cell"><span class="check">✓</span> Gas supplier integration</div>
+                    <div class="matrix-cell"><span class="cross">✗</span> No integration</div>
+                </div>
+            </div>
+            <p style="font-size: 1.3rem; text-align: center; margin-top: 30px;">
+                <strong>Key Differentiators:</strong> First-mover advantage, local partnerships, recurring revenue, safety focus
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Funding Requirements -->
+    <div class="slide funding-slide">
+        <div class="container">
+            <h2>Funding Strategy</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">
+                Three-stage funding to capture market opportunity
+            </p>
+            <div class="funding-rounds">
+                <div class="funding-card">
+                    <h3>Seed Round</h3>
+                    <div class="funding-amount">₦200M</div>
+                    <ul class="funding-use">
+                        <li>Manufacturing setup & tooling</li>
+                        <li>Initial inventory (2,000 units)</li>
+                        <li>Platform development</li>
+                        <li>Working capital</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 1.1rem;">Timeline: Q1 2025</p>
+                </div>
+                <div class="funding-card">
+                    <h3>Series A</h3>
+                    <div class="funding-amount">₦1B</div>
+                    <ul class="funding-use">
+                        <li>Scale to 25,000 units</li>
+                        <li>Sales & marketing expansion</li>
+                        <li>Platform enhancement</li>
+                        <li>Team scaling</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 1.1rem;">Timeline: Q4 2025</p>
+                </div>
+                <div class="funding-card">
+                    <h3>Series B</h3>
+                    <div class="funding-amount">₦5B</div>
+                    <ul class="funding-use">
+                        <li>National expansion</li>
+                        <li>Advanced R&D</li>
+                        <li>Regional expansion</li>
+                        <li>Strategic partnerships</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 1.1rem;">Timeline: Q2 2027</p>
+                </div>
+            </div>
+            <p style="font-size: 1.3rem; text-align: center; margin-top: 40px; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px;">
+                <strong>Exit Strategy:</strong> Strategic acquisition by major gas/utility company or regional expansion funding
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Team -->
+    <div class="slide team-slide">
+        <div class="container">
+            <h2>Leadership Team</h2>
+            <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">
+                Experienced team with deep market knowledge and technical expertise
+            </p>
+            <div class="team-members">
+                <div class="team-member">
+                    <h3>CEO & Founder</h3>
+                    <div class="role">Business Leadership</div>
+                    <p>10+ years in Nigerian tech sector. Former senior role at major Nigerian telecommunications company. MBA from top Nigerian business school.</p>
+                </div>
+                <div class="team-member">
+                    <h3>CTO & Co-Founder</h3>
+                    <div class="role">Technical Leadership</div>
+                    <p>15+ years in IoT and hardware development. Former lead engineer at international technology corporation. M.Sc. in Electrical Engineering.</p>
+                </div>
+                <div class="team-member">
+                    <h3>Head of Operations</h3>
+                    <div class="role">Manufacturing & Supply Chain</div>
+                    <p>12+ years in Nigerian manufacturing. Expert in local supply chain and regulatory compliance. Former operations director at multinational FMCG company.</p>
+                </div>
+                <div class="team-member">
+                    <h3>Head of Business Development</h3>
+                    <div class="role">Partnerships & Sales</div>
+                    <p>8+ years in gas/energy sector. Strong relationships with major Nigerian gas distribution companies. Extensive B2B2C experience.</p>
+                </div>
+            </div>
+            <p style="font-size: 1.3rem; text-align: center; margin-top: 40px;">
+                <strong>Advisory Board:</strong> Industry veterans, successful Nigerian entrepreneurs, and IoT technology experts
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 11: Thank You -->
+    <div class="slide thank-you-slide">
+        <div class="container">
+            <h2>Let's Transform Gas Management Together</h2>
+            <p style="font-size: 1.5rem; margin: 40px 0;">
+                Join us in building Nigeria's smart gas infrastructure
+            </p>
+            <div class="contact-info">
+                <p><strong>Contact:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630a0d050c230116110715024d0d04">[email&#160;protected]</a></p>
+                <p><strong>Website:</strong> www.burdva.ng</p>
+                <p><strong>Phone:</strong> +234 XXX XXX XXXX</p>
+            </div>
+            <p style="font-size: 1.2rem; margin-top: 60px; opacity: 0.8;">
+                Burdva Limited - Smart Gas. Smart Life.
+            </p>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scrolling for navigation
+        document.addEventListener('keydown', function(event) {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlide = Math.round(window.scrollY / window.innerHeight);
+            
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                if (currentSlide < slides.length - 1) {
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (event.key === 'ArrowLeft') {
+                if (currentSlide > 0) {
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Add touch/swipe support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(event) {
+            touchStartY = event.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(event) {
+            touchEndY = event.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlide = Math.round(window.scrollY / window.innerHeight);
+            
+            if (touchStartY - touchEndY > 50) {
+                // Swipe up
+                if (currentSlide < slides.length - 1) {
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            if (touchEndY - touchStartY > 50) {
+                // Swipe down
+                if (currentSlide > 0) {
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
