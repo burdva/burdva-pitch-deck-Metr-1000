@@ -3,327 +3,828 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://checkmygas.com/favicon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://checkmygas.com/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://checkmygas.com/favicon.png">
-    <link rel="icon" type="image/x-icon" href="https://checkmygas.com/favicon.png">
-    <title>Burdva | Smart Life.</title>
+    <meta name="description" content="Burdva Limited is a Lagos-based technology company building the infrastructure behind everyday life — Resida, the operating system for real estate, and GM1000, smart energy monitoring.">
+    <meta name="theme-color" content="#0A0A0B">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Burdva Limited — Smart Life.">
+    <meta property="og:description" content="Two ventures, one engineering standard. Resida for real estate. GM1000 for energy. Built in Lagos for the real world.">
+    <meta property="og:site_name" content="Burdva Limited">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.resida.app/icon-192.png">
+    <link rel="icon" type="image/png" href="https://www.resida.app/icon-192.png">
+
+    <title>Burdva Limited — Smart Life.</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0A0A0B',
+                        paper: '#FFFFFF',
+                        blue: { DEFAULT: '#2563EB', dark: '#1D4ED8', soft: '#EFF4FF' },
+                        ember: { DEFAULT: '#EA580C', dark: '#C2410C', soft: '#FFF4ED' },
+                    },
+                    fontFamily: {
+                        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+                    },
+                    maxWidth: { content: '1200px' },
+                }
+            }
+        }
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
+        :root { --blue: #2563EB; --ember: #EA580C; }
 
-        :root {
-            --burdva-blue: #2563eb;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #fff;
+            color: #0A0A0B;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+        }
+        ::selection { background: #2563EB; color: #fff; }
+
+        h1, h2, h3, .font-display { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* ---- Eyebrow / kicker ---- */
+        .kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        /* ---- Navigation ---- */
+        .nav-shell { transition: padding .35s ease, background .35s ease, border-color .35s ease; }
+        .nav-scrolled {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(10,10,11,0.07);
+        }
+        .nav-link { position: relative; transition: color .2s ease; }
+        .nav-link::after {
+            content: ""; position: absolute; left: 0; bottom: -4px; height: 1.5px; width: 0;
+            background: #0A0A0B; transition: width .25s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .dropdown { opacity: 0; visibility: hidden; transform: translateY(6px); transition: all .2s ease; }
+        .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        /* ---- Buttons ---- */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+               font-weight: 600; font-size: .9rem; border-radius: 12px; transition: all .22s ease; white-space: nowrap; }
+        .btn-ink { background: #0A0A0B; color: #fff; }
+        .btn-ink:hover { background: #232326; transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(10,10,11,.5); }
+        .btn-blue { background: #2563EB; color: #fff; }
+        .btn-blue:hover { background: #1D4ED8; transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(37,99,235,.6); }
+        .btn-ember { background: #EA580C; color: #fff; }
+        .btn-ember:hover { background: #C2410C; transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(234,88,12,.55); }
+        .btn-ghost { border: 1px solid rgba(10,10,11,.14); color: #0A0A0B; background: #fff; }
+        .btn-ghost:hover { border-color: rgba(10,10,11,.4); background: #fafafa; transform: translateY(-1px); }
+        .btn-ghost-light { border: 1px solid rgba(255,255,255,.22); color: #fff; }
+        .btn-ghost-light:hover { border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.06); }
+
+        /* ---- Link with arrow ---- */
+        .link-arrow { display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; transition: gap .2s ease; }
+        .link-arrow:hover { gap: .7rem; }
+
+        /* ---- Cards ---- */
+        .card { transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1), border-color .3s ease; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 28px 60px -28px rgba(10,10,11,.22); }
+
+        /* ---- Reveal on scroll ---- */
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+        .reveal.in { opacity: 1; transform: none; }
+        .reveal.d1 { transition-delay: .08s; }
+        .reveal.d2 { transition-delay: .16s; }
+        .reveal.d3 { transition-delay: .24s; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; }
+            html { scroll-behavior: auto; }
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        /* ---- Backdrops ---- */
+        .grid-bg {
+            background-image:
+              linear-gradient(rgba(10,10,11,.035) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10,10,11,.035) 1px, transparent 1px);
+            background-size: 64px 64px;
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 70% 0%, #000 30%, transparent 75%);
+                    mask-image: radial-gradient(ellipse 80% 60% at 70% 0%, #000 30%, transparent 75%);
         }
 
-        .glass-nav {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background-color: rgba(255, 255, 255, 0.7);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        /* ---- GM1000 live gauge ---- */
+        .gauge-track { stroke: rgba(234,88,12,.14); }
+        .gauge-fill {
+            stroke: #EA580C;
+            stroke-linecap: round;
+            stroke-dasharray: 327;
+            stroke-dashoffset: 327;
+            transition: stroke-dashoffset 1.6s cubic-bezier(.22,1,.36,1);
         }
+        .in .gauge-fill { stroke-dashoffset: 105; } /* ~68% */
 
-        .hero-gradient {
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.05), transparent 40%);
-        }
+        /* ---- Resida rent progress ---- */
+        .bar-fill { width: 0; transition: width 1.5s cubic-bezier(.22,1,.36,1) .2s; }
+        .in .bar-fill { width: var(--w, 70%); }
 
-        .btn-black {
-            background: #000;
-            color: #fff;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
+        /* ---- Signal ping ---- */
+        @keyframes ping { 0% { transform: scale(.6); opacity: .8; } 80%,100% { transform: scale(2.2); opacity: 0; } }
+        .ping { animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite; }
 
-        .btn-black:hover {
-            background: #222;
-            transform: translateY(-2px);
-        }
+        /* ---- Marquee ---- */
+        .marquee { display: flex; gap: 3rem; width: max-content; animation: scroll 32s linear infinite; }
+        @keyframes scroll { to { transform: translateX(-50%); } }
+        .marquee-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+                                mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 
-        .card-hover {
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 9px; }
         ::-webkit-scrollbar-track { background: #fff; }
-        ::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ddd; }
+        ::-webkit-scrollbar-thumb { background: #e3e3e6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #cfcfd4; }
     </style>
 </head>
-<body class="selection:bg-blue-600 selection:text-white">
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="text-2xl font-black tracking-tighter">
-                Burdva<span class="text-blue-600"> Limited</span>
-            </div>
-            
-            <div class="hidden md:flex items-center space-x-10 text-[11px] font-bold uppercase tracking-widest text-black/50">
-                <div class="relative group">
-                    <button class="hover:text-black flex items-center gap-1 transition-all">Product <i class="fa-solid fa-chevron-down text-[10px]"></i></button>
-                    <div class="absolute top-full left-0 mt-4 w-48 bg-white border border-gray-100 shadow-2xl rounded-2xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-50 rounded-lg">GM1000</a>
-                        <a href="https://checkmygas.com" taget="_blank" class="block px-4 py-2 hover:bg-gray-50 rounded-lg">checkmygas.com</a>
-                        <a href="https://app.metrgrid.com" taget="_blank" class="block px-4 py-2 hover:bg-gray-50 rounded-lg">MetrGrid</a>
+<body>
+
+    <!-- ════════════════════ NAV ════════════════════ -->
+    <nav id="nav" class="nav-shell fixed top-0 inset-x-0 z-50 px-5 sm:px-8 py-5">
+        <div class="max-w-content mx-auto flex items-center justify-between">
+            <a href="#top" class="flex items-center gap-2.5 group">
+                <span class="inline-flex h-8 w-8 items-center justify-center rounded-[9px] bg-ink text-white font-display font-bold text-[17px] leading-none">b</span>
+                <span class="font-display text-[21px] font-bold tracking-tight">Burdva</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-9 text-[14px] font-medium text-ink/70">
+                <div class="has-dropdown relative">
+                    <button class="flex items-center gap-1.5 hover:text-ink transition-colors">
+                        Ventures
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[320px]">
+                        <div class="bg-white rounded-2xl border border-ink/10 shadow-2xl p-2">
+                            <a href="#resida" class="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-blue-soft transition-colors">
+                                <span class="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-soft"><img src="assets/resida-mark.png" alt="" class="h-5 w-5"></span>
+                                <span>
+                                    <span class="block font-semibold text-ink text-[14px]">Resida</span>
+                                    <span class="block text-[12.5px] text-ink/55 leading-snug">The operating system for real estate</span>
+                                </span>
+                            </a>
+                            <a href="#gm1000" class="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-ember-soft transition-colors">
+                                <span class="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-ember-soft text-ember">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 3 4 7a4 4 0 0 1-8 0c0-1 .5-2 1-2.5"/><path d="M12 22a6 6 0 0 0 6-6c0-2-1-3.5-2-4.5"/></svg>
+                                </span>
+                                <span>
+                                    <span class="block font-semibold text-ink text-[14px]">GM1000</span>
+                                    <span class="block text-[12.5px] text-ink/55 leading-snug">Smart energy & tank monitoring</span>
+                                </span>
+                            </a>
+                            <div class="my-1 border-t border-ink/5"></div>
+                            <a href="https://checkmygas.com" target="_blank" rel="noopener" class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-ink/[.03] transition-colors text-[13.5px] font-medium text-ink/75">
+                                CheckMyGas <span class="mono text-[11px] text-ink/40">consumer ↗</span>
+                            </a>
+                            <a href="https://app.metrgrid.com" target="_blank" rel="noopener" class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-ink/[.03] transition-colors text-[13.5px] font-medium text-ink/75">
+                                MetrGrid <span class="mono text-[11px] text-ink/40">operators ↗</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <a href="#about" class="hover:text-black transition-all">About</a>
-                <a href="#contact" class="hover:text-black transition-all">Contact</a>
-                <a href="https://wa.me/2348074566227" taget="_blank" class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-all">GET STARTED</a>
+                <a href="#why" class="nav-link hover:text-ink">Why Burdva</a>
+                <a href="#about" class="nav-link hover:text-ink">Company</a>
+                <a href="#contact" class="nav-link hover:text-ink">Contact</a>
             </div>
 
-            <button class="md:hidden text-black text-xl" onclick="toggleMenu()">
-                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#contact" class="btn btn-ghost px-5 py-2.5">Talk to us</a>
+                <a href="https://wa.me/2348074566227" target="_blank" rel="noopener" class="btn btn-ink px-5 py-2.5">Get started</a>
+            </div>
+
+            <button class="md:hidden h-10 w-10 -mr-2 flex items-center justify-center text-ink" onclick="toggleMenu()" aria-label="Menu">
+                <svg id="menuIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-white z-40 hidden flex-col items-center justify-center space-y-8">
-        <a href="#about" class="text-4xl font-black" onclick="toggleMenu()">About</a>
-        <a href="#product" class="text-4xl font-black" onclick="toggleMenu()">Product</a>
-        <a href="#contact" class="text-4xl font-black" onclick="toggleMenu()">Contact</a>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-40 hidden flex-col px-6 pt-28 pb-10">
+        <div class="flex flex-col gap-1 text-ink">
+            <a href="#resida" onclick="toggleMenu()" class="flex items-center justify-between py-4 border-b border-ink/8 font-display text-2xl font-semibold">Resida <span class="text-blue text-base mono">proptech</span></a>
+            <a href="#gm1000" onclick="toggleMenu()" class="flex items-center justify-between py-4 border-b border-ink/8 font-display text-2xl font-semibold">GM1000 <span class="text-ember text-base mono">energy</span></a>
+            <a href="#why" onclick="toggleMenu()" class="py-4 border-b border-ink/8 font-display text-2xl font-semibold">Why Burdva</a>
+            <a href="#about" onclick="toggleMenu()" class="py-4 border-b border-ink/8 font-display text-2xl font-semibold">Company</a>
+            <a href="#contact" onclick="toggleMenu()" class="py-4 border-b border-ink/8 font-display text-2xl font-semibold">Contact</a>
+        </div>
+        <div class="mt-auto flex flex-col gap-3">
+            <a href="https://wa.me/2348074566227" target="_blank" rel="noopener" class="btn btn-ink py-4 text-base">Get started on WhatsApp</a>
+            <div class="flex gap-4 text-[13px] text-ink/50 mono">
+                <a href="https://checkmygas.com" target="_blank" rel="noopener">checkmygas.com ↗</a>
+                <a href="https://app.metrgrid.com" target="_blank" rel="noopener">metrgrid ↗</a>
+            </div>
+        </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex flex-col items-center justify-center hero-gradient px-6 text-center">
-        <div class="reveal">
-            <span class="inline-block px-4 py-1 border border-gray-100 bg-gray-50 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 mb-8">
-                Smart Infrastructure Solutions
-            </span>
-            <h1 class="text-5xl md:text-[100px] font-black leading-[0.9] tracking-tight mb-8">
-                Intelligent <br>
-                <span class="text-gray-400">Connectivity.</span>
-            </h1>
-            <p class="text-gray-500 max-w-2xl mx-auto text-lg md:text-xl font-medium mb-12">
-                Connecting physical assets to intelligent software ecosystems. Reducing losses and improving visibility through real-time monitoring.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://selar.com/132c41s538" target="_blank" class="btn-black px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-2">
-                    Meet GM1000 <i class="fa-solid fa-arrow-right"></i>
+    <!-- ════════════════════ HERO ════════════════════ -->
+    <header id="top" class="relative pt-40 pb-20 sm:pt-44 sm:pb-28 px-5 sm:px-8 overflow-hidden">
+        <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+        <!-- constellation motif -->
+        <svg class="absolute top-10 right-[-120px] w-[680px] h-[680px] pointer-events-none opacity-[.5] hidden lg:block" viewBox="0 0 600 600" fill="none">
+            <g stroke="#2563EB" stroke-width="1" stroke-opacity="0.5">
+                <path d="M300 120 L470 210 L455 410 L250 470 L150 300 Z"/>
+                <path d="M470 210 L560 120 M455 410 L575 470 M150 300 L40 240 M250 470 L210 580 M300 120 L320 20"/>
+                <path d="M300 120 L455 410 M470 210 L250 470 M150 300 L470 210"/>
+            </g>
+            <g fill="#2563EB">
+                <circle cx="300" cy="120" r="3.5"/><circle cx="470" cy="210" r="3.5"/><circle cx="455" cy="410" r="3.5"/><circle cx="250" cy="470" r="3.5"/><circle cx="150" cy="300" r="3.5"/>
+            </g>
+        </svg>
+
+        <div class="max-w-content mx-auto relative">
+            <div class="max-w-3xl">
+                <div class="reveal inline-flex items-center gap-2.5 rounded-full border border-ink/10 bg-white/70 pl-2 pr-4 py-1.5 mb-7">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-ink text-white kicker px-2.5 py-1 text-[10px]">Burdva Ltd</span>
+                    <span class="kicker text-ink/55">Lagos, Nigeria</span>
+                </div>
+
+                <h1 class="reveal d1 text-[2.65rem] leading-[1.04] sm:text-6xl lg:text-[4.6rem] font-bold text-ink">
+                    Where the physical world meets <span class="text-blue">intelligent software.</span>
+                </h1>
+
+                <p class="reveal d2 mt-7 text-lg sm:text-xl text-ink/60 leading-relaxed max-w-2xl">
+                    Burdva builds the infrastructure behind two essentials of modern life — your <strong class="text-ink font-semibold">home</strong> and your <strong class="text-ink font-semibold">energy</strong>. Two ventures, one engineering standard: <span class="text-ink font-semibold">Resida</span> for real estate, <span class="text-ink font-semibold">GM1000</span> for energy.
+                </p>
+
+                <div class="reveal d3 mt-9 flex flex-col sm:flex-row gap-3">
+                    <a href="#ventures" class="btn btn-ink px-7 py-4 text-[15px]">
+                        Explore our ventures
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost px-7 py-4 text-[15px]">Partner with us</a>
+                </div>
+            </div>
+
+            <!-- stat strip -->
+            <div class="reveal d3 mt-16 grid grid-cols-2 sm:grid-cols-4 gap-px bg-ink/8 rounded-2xl overflow-hidden border border-ink/8">
+                <div class="bg-white px-5 py-6">
+                    <div class="font-display text-3xl font-bold text-ink">2</div>
+                    <div class="text-[13px] text-ink/55 mt-1">Ventures, one standard</div>
+                </div>
+                <div class="bg-white px-5 py-6">
+                    <div class="font-display text-3xl font-bold text-ink">4</div>
+                    <div class="text-[13px] text-ink/55 mt-1">Products live in market</div>
+                </div>
+                <div class="bg-white px-5 py-6">
+                    <div class="font-display text-3xl font-bold text-ink">₦</div>
+                    <div class="text-[13px] text-ink/55 mt-1">Naira-native, by design</div>
+                </div>
+                <div class="bg-white px-5 py-6">
+                    <div class="font-display text-3xl font-bold text-ink">24/7</div>
+                    <div class="text-[13px] text-ink/55 mt-1">Real-time monitoring</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ════════════════════ VENTURES OVERVIEW ════════════════════ -->
+    <section id="ventures" class="px-5 sm:px-8 py-20 sm:py-28">
+        <div class="max-w-content mx-auto">
+            <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <p class="kicker text-ink/45 mb-3">What we build</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold text-ink max-w-xl leading-[1.05]">One company.<br>Two ventures.</h2>
+                </div>
+                <p class="text-ink/60 max-w-md text-[15px] leading-relaxed">
+                    We operate at the intersection of <span class="text-ink font-medium">hardware, software, and money</span> — turning physical assets into live, intelligent, revenue-generating systems.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Resida teaser -->
+                <a href="#resida" class="card group relative block rounded-3xl border border-ink/10 bg-white p-8 sm:p-10 overflow-hidden">
+                    <div class="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-blue-soft blur-2xl opacity-70 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="flex items-center justify-between">
+                            <span class="kicker text-blue">Venture 01</span>
+                            <img src="assets/resida-mark.png" alt="Resida" class="h-8 w-8">
+                        </div>
+                        <h3 class="font-display text-3xl font-bold mt-6">Resida</h3>
+                        <p class="text-ink/60 mt-3 leading-relaxed">The operating system for real estate. Rent, payments, tenants, shortlets and maintenance — automated on one platform.</p>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="text-[12.5px] font-medium text-blue bg-blue-soft rounded-full px-3 py-1">PropTech</span>
+                            <span class="text-[12.5px] font-medium text-blue bg-blue-soft rounded-full px-3 py-1">FinTech</span>
+                            <span class="text-[12.5px] font-medium text-blue bg-blue-soft rounded-full px-3 py-1">AdTech</span>
+                        </div>
+                        <span class="link-arrow text-blue mt-7 text-[15px]">Explore Resida
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
                 </a>
-                <button class="border border-gray-200 px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">
-                    Contact Us
-                </button>
+
+                <!-- GM1000 teaser -->
+                <a href="#gm1000" class="card group relative block rounded-3xl border border-ink/10 bg-white p-8 sm:p-10 overflow-hidden">
+                    <div class="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-ember-soft blur-2xl opacity-70 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="flex items-center justify-between">
+                            <span class="kicker text-ember">Venture 02</span>
+                            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-ember-soft text-ember">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 3 4 7a4 4 0 0 1-8 0c0-1 .5-2 1-2.5"/><path d="M12 22a6 6 0 0 0 6-6c0-2-1-3.5-2-4.5"/></svg>
+                            </span>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold mt-6">GM1000</h3>
+                        <p class="text-ink/60 mt-3 leading-relaxed">Smart energy and tank monitoring. Industrial-grade IoT that tracks levels in real time, predicts refills and catches leaks.</p>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="text-[12.5px] font-medium text-ember bg-ember-soft rounded-full px-3 py-1">IoT Hardware</span>
+                            <span class="text-[12.5px] font-medium text-ember bg-ember-soft rounded-full px-3 py-1">CheckMyGas</span>
+                            <span class="text-[12.5px] font-medium text-ember bg-ember-soft rounded-full px-3 py-1">MetrGrid</span>
+                        </div>
+                        <span class="link-arrow text-ember mt-7 text-[15px]">Explore GM1000
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="absolute bottom-10 animate-bounce text-gray-300">
-            <i class="fa-solid fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-32 px-6">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+    <!-- ════════════════════ RESIDA ════════════════════ -->
+    <section id="resida" class="scroll-mt-24 px-5 sm:px-8 py-20 sm:py-28 bg-[#FAFBFD] border-y border-ink/8">
+        <div class="max-w-content mx-auto grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <div class="reveal">
-                <span class="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-6 block">About Burdva</span>
-                <h2 class="text-4xl md:text-6xl font-black leading-tight mb-8 tracking-tighter">
-                    Bridging Physical <br> and Digital.
-                </h2>
-                <div class="space-y-6 text-gray-500 text-lg font-medium leading-relaxed">
-                    <p class="text-black">
-                        Burdva Limited is a technology company building smart infrastructure solutions that connect the physical world to intelligent software.
-                    </p>
-                    <p>
-                        We design and deploy IoT-powered systems for tank monitoring, energy and resource management, automation, and data-driven operations. Burdva helps businesses reduce losses, improve visibility, and operate more efficiently through real-time monitoring, predictive analytics, and seamless digital workflows.
-                    </p>
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="assets/resida-mark.png" alt="Resida" class="h-9 w-9">
+                    <span class="kicker text-blue">Venture 01 · PropTech · FinTech</span>
                 </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-6 reveal delay-200">
-                <div class="p-8 bg-gray-50 rounded-[2.5rem] flex flex-col items-center justify-center text-center card-hover">
-                    <i class="fa-solid fa-bolt-lightning text-3xl text-blue-600 mb-4"></i>
-                    <span class="font-bold uppercase tracking-widest text-[10px]">Efficiency</span>
-                </div>
-                <div class="p-8 bg-gray-50 rounded-[2.5rem] flex flex-col items-center justify-center text-center card-hover">
-                    <i class="fa-solid fa-eye text-3xl text-blue-600 mb-4"></i>
-                    <span class="font-bold uppercase tracking-widest text-[10px]">Visibility</span>
-                </div>
-                <div class="p-8 bg-gray-50 rounded-[2.5rem] flex flex-col items-center justify-center text-center card-hover">
-                    <i class="fa-solid fa-database text-3xl text-blue-600 mb-4"></i>
-                    <span class="font-bold uppercase tracking-widest text-[10px]">Predictive</span>
-                </div>
-                <div class="p-8 bg-gray-50 rounded-[2.5rem] flex flex-col items-center justify-center text-center card-hover">
-                    <i class="fa-solid fa-shield-check text-3xl text-blue-600 mb-4"></i>
-                    <span class="font-bold uppercase tracking-widest text-[10px]">Security</span>
-                </div>
-            </div>
-        </div>
-    </section>
+                <h2 class="text-4xl sm:text-5xl font-bold leading-[1.05]">The operating system for&nbsp;real estate.</h2>
+                <p class="mt-6 text-lg text-ink/60 leading-relaxed">
+                    Resida runs the entire lifecycle of a property from one platform — collect rent automatically, give every tenant a wallet, run shortlets, dispatch handymen and manage whole agencies. Built Lagos-first, Naira-native.
+                </p>
 
-    <!-- Product Spotlight -->
-    <section id="product" class="py-32 px-6 bg-gray-50/50">
-        <div class="max-w-7xl mx-auto text-center reveal">
-            <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter">The GM1000.</h2>
-            <p class="text-gray-500 max-w-3xl mx-auto text-lg md:text-xl font-medium mb-16">
-                Revolutionising gas cylinder management in Nigeria through innovative IoT solutions. We're building the smart gas infrastructure for the future.
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-10 text-left">
-                <div class="bg-white p-12 rounded-[3rem] shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-8">
-                        <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
+                <div class="mt-9 grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 text-blue shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span>
+                        <div><div class="font-semibold text-[15px]">Wallets &amp; auto-rent</div><div class="text-[13.5px] text-ink/55 leading-snug">Dedicated virtual accounts, automatic deductions</div></div>
                     </div>
-                    <h3 class="text-3xl font-black mb-4">Mobile Ecosystem</h3>
-                    <p class="text-gray-500 mb-8 font-medium">Full control of your gas infrastructure directly from your pocket. Monitoring, alerts, and management unified into a seamless digital workflow.</p>
-                    <a href="#" class="text-blue-600 font-bold uppercase tracking-widest text-xs flex items-center gap-2">Explore App <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="bg-white p-12 rounded-[3rem] shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-black rounded-2xl flex items-center justify-center text-white mb-8">
-                        <i class="fa-solid fa-microchip text-2xl"></i>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 text-blue shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+                        <div><div class="font-semibold text-[15px]">Shortlet engine</div><div class="text-[13.5px] text-ink/55 leading-snug">Nightly booking with instant checkout</div></div>
                     </div>
-                    <h3 class="text-3xl font-black mb-4">GM1000 Edge</h3>
-                    <p class="text-gray-500 mb-8 font-medium">Industrial grade hardware built for accuracy and long-term durability. High-precision monitoring for tanks and resources.</p>
-                    <a href="https://selar.com/132c41s538" target="_blank" class="text-black font-bold uppercase tracking-widest text-xs flex items-center gap-2">Specifications <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 text-blue shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 2.7 2.7 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.7-.4-.4-1.7z"/></svg></span>
+                        <div><div class="font-semibold text-[15px]">Handyman marketplace</div><div class="text-[13.5px] text-ink/55 leading-snug">Verified vendors, job routing &amp; payouts</div></div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 text-blue shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3zM3 14v4a1 1 0 0 0 1 1h3"/></svg></span>
+                        <div><div class="font-semibold text-[15px]">Agency back-office</div><div class="text-[13.5px] text-ink/55 leading-snug">CRM, branches, leads &amp; commissions</div></div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-32 px-6">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20">
-            <div class="reveal">
-                <h2 class="text-5xl md:text-7xl font-black mb-12 tracking-tighter leading-none">Let's build <br> the future.</h2>
-                <div class="space-y-8">
-                    <a href="mailto:technology@burdva.com" class="flex items-center gap-6 group">
-                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] uppercase font-black tracking-widest text-gray-400 mb-1">Email</p>
-                            <p class="font-bold text-lg">technology@burdva.com</p>
-                        </div>
+                <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink/50 mono">
+                    <span>6 user types</span><span class="text-ink/20">•</span><span>AI tenant relations</span><span class="text-ink/20">•</span><span>Audit-grade ledgers</span>
+                </div>
+
+                <div class="mt-9">
+                    <a href="https://resida.app" target="_blank" rel="noopener" class="btn btn-blue px-7 py-4 text-[15px]">
+                        Visit resida.app
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
                     </a>
-                    <a href="tel:+2348074566227" class="flex items-center gap-6 group">
-                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
-                            <i class="fa-solid fa-phone"></i>
+                </div>
+            </div>
+
+            <!-- Resida product mock -->
+            <div class="reveal d1">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-blue/10 blur-3xl rounded-full scale-90"></div>
+                    <div class="card relative rounded-3xl border border-ink/10 bg-white shadow-xl p-6 sm:p-7">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-2">
+                                <img src="assets/resida-mark.png" alt="" class="h-6 w-6">
+                                <span class="font-display font-semibold">Tenant Wallet</span>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 text-[12px] font-medium text-blue bg-blue-soft rounded-full px-2.5 py-1">
+                                <span class="h-1.5 w-1.5 rounded-full bg-blue"></span> Auto-pay on
+                            </span>
                         </div>
-                        <div>
-                            <p class="text-[10px] uppercase font-black tracking-widest text-gray-400 mb-1">Phone</p>
-                            <p class="font-bold text-lg">+234 807 4566 227</p>
+
+                        <div class="rounded-2xl bg-ink text-white p-5">
+                            <div class="text-[12px] text-white/55 mono uppercase tracking-wider">Available balance</div>
+                            <div class="font-display text-4xl font-bold mt-1.5">₦1,240,000</div>
+                            <div class="mt-4 flex items-center justify-between text-[12.5px] text-white/55">
+                                <span class="mono">Wema · DVA 7 032 118 994</span>
+                                <span>•••• 8841</span>
+                            </div>
                         </div>
-                    </a>
-                    <div class="flex items-center gap-6">
-                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
-                            <i class="fa-solid fa-location-dot"></i>
+
+                        <div class="mt-5 rounded-2xl border border-ink/8 p-4">
+                            <div class="flex items-center justify-between text-[13.5px]">
+                                <span class="font-medium">Annual rent · 3-bed, Lekki</span>
+                                <span class="text-ink/55 mono">₦1.8M / yr</span>
+                            </div>
+                            <div class="mt-3 h-2 rounded-full bg-ink/8 overflow-hidden">
+                                <div class="bar-fill h-full rounded-full bg-blue" style="--w:70%"></div>
+                            </div>
+                            <div class="mt-2.5 flex items-center justify-between text-[12px] text-ink/50">
+                                <span>70% funded toward renewal</span>
+                                <span>Due 12 Mar</span>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-[10px] uppercase font-black tracking-widest text-gray-400 mb-1">Office</p>
-                            <p class="font-bold text-lg">Lagos, Nigeria</p>
+
+                        <div class="mt-4 grid grid-cols-3 gap-3">
+                            <div class="rounded-xl bg-[#FAFBFD] border border-ink/8 p-3 text-center">
+                                <div class="font-display text-xl font-bold">92%</div>
+                                <div class="text-[11px] text-ink/50 mt-0.5">Occupancy</div>
+                            </div>
+                            <div class="rounded-xl bg-[#FAFBFD] border border-ink/8 p-3 text-center">
+                                <div class="font-display text-xl font-bold">14</div>
+                                <div class="text-[11px] text-ink/50 mt-0.5">Units</div>
+                            </div>
+                            <div class="rounded-xl bg-[#FAFBFD] border border-ink/8 p-3 text-center">
+                                <div class="font-display text-xl font-bold text-blue">0</div>
+                                <div class="text-[11px] text-ink/50 mt-0.5">Arrears</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════ GM1000 ════════════════════ -->
+    <section id="gm1000" class="scroll-mt-24 px-5 sm:px-8 py-20 sm:py-28">
+        <div class="max-w-content mx-auto grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+            <!-- GM1000 device + gauge (left on desktop) -->
+            <div class="reveal lg:order-1 order-2">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-ember/10 blur-3xl rounded-full scale-90"></div>
+                    <div class="card relative rounded-3xl border border-ink/10 bg-white shadow-xl p-6 sm:p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-2.5">
+                                <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-ember">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="12" cy="12" r="3"/></svg>
+                                </span>
+                                <span class="font-display font-semibold">GM1000 · Cylinder 01</span>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 text-[12px] font-medium text-ember">
+                                <span class="relative flex h-2 w-2"><span class="ping absolute inline-flex h-full w-full rounded-full bg-ember"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-ember"></span></span>
+                                Online
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-7">
+                            <!-- gauge -->
+                            <div class="relative shrink-0">
+                                <svg width="132" height="132" viewBox="0 0 132 132" class="-rotate-90">
+                                    <circle class="gauge-track" cx="66" cy="66" r="52" fill="none" stroke-width="12"/>
+                                    <circle class="gauge-fill" cx="66" cy="66" r="52" fill="none" stroke-width="12"/>
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <span class="font-display text-3xl font-bold">68<span class="text-lg">%</span></span>
+                                    <span class="text-[11px] text-ink/45 mt-0.5">level</span>
+                                </div>
+                            </div>
+                            <div class="space-y-3 flex-1">
+                                <div class="flex items-center justify-between border-b border-ink/8 pb-2.5">
+                                    <span class="text-[13px] text-ink/55">Remaining</span>
+                                    <span class="font-semibold mono text-[14px]">12.4 kg</span>
+                                </div>
+                                <div class="flex items-center justify-between border-b border-ink/8 pb-2.5">
+                                    <span class="text-[13px] text-ink/55">Refill in</span>
+                                    <span class="font-semibold mono text-[14px] text-ember">~9 days</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[13px] text-ink/55">Daily use</span>
+                                    <span class="font-semibold mono text-[14px]">1.4 kg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex items-center gap-2 rounded-2xl bg-ember-soft text-ember-dark p-3.5 text-[13px] font-medium">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+                            No unusual flow. Last leak check passed 2h ago.
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between text-[11.5px] text-ink/45 mono">
+                            <span>SIGNAL ▮▮▮▮▯</span>
+                            <span>SYNCED 18:42</span>
+                            <span>via MetrGrid</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-gray-50 p-10 md:p-16 rounded-[3rem] reveal delay-200">
-                <form class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" placeholder="Full Name" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium">
-                        <input type="email" placeholder="Email" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium">
+            <!-- copy (right on desktop) -->
+            <div class="reveal d1 lg:order-2 order-1">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-ember-soft text-ember">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 3 4 7a4 4 0 0 1-8 0c0-1 .5-2 1-2.5"/><path d="M12 22a6 6 0 0 0 6-6c0-2-1-3.5-2-4.5"/></svg>
+                    </span>
+                    <span class="kicker text-ember">Venture 02 · Energy · IoT Hardware</span>
+                </div>
+                <h2 class="text-4xl sm:text-5xl font-bold leading-[1.05]">Never run out.<br>Never lose a drop.</h2>
+                <p class="mt-6 text-lg text-ink/60 leading-relaxed">
+                    GM1000 is an industrial-grade sensor that watches your gas and tank levels in real time — predicting refills before you run dry, catching leaks the moment they start, and turning every physical asset into live data on your phone.
+                </p>
+
+                <div class="mt-9 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-ember shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <span class="text-[15px] text-ink/80"><strong class="text-ink font-semibold">Real-time level monitoring</strong> — to the kilogram, 24/7</span>
                     </div>
-                    <input type="text" placeholder="Subject" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium">
-                    <textarea placeholder="Your message" rows="4" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"></textarea>
-                    <button type="submit" class="w-full py-5 btn-black rounded-full font-bold uppercase tracking-widest text-sm shadow-xl">
-                        Send Message
-                    </button>
-                </form>
+                    <div class="flex items-center gap-3">
+                        <span class="text-ember shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <span class="text-[15px] text-ink/80"><strong class="text-ink font-semibold">Leak &amp; anomaly alerts</strong> — instant safety warnings</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-ember shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <span class="text-[15px] text-ink/80"><strong class="text-ink font-semibold">Refill prediction</strong> — order before you're empty</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-ember shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <span class="text-[15px] text-ink/80"><strong class="text-ink font-semibold">Fleet dashboard</strong> — every asset, one screen, remotely</span>
+                    </div>
+                </div>
+
+                <!-- sub-brands -->
+                <div class="mt-9 grid sm:grid-cols-2 gap-3">
+                    <a href="https://checkmygas.com" target="_blank" rel="noopener" class="group flex items-center justify-between rounded-2xl border border-ink/10 bg-white px-5 py-4 hover:border-ember/40 transition-colors">
+                        <div>
+                            <div class="font-semibold text-[15px]">CheckMyGas</div>
+                            <div class="text-[12.5px] text-ink/50">For homes &amp; small businesses</div>
+                        </div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-ink/40 group-hover:text-ember transition-colors"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                    </a>
+                    <a href="https://app.metrgrid.com" target="_blank" rel="noopener" class="group flex items-center justify-between rounded-2xl border border-ink/10 bg-white px-5 py-4 hover:border-ember/40 transition-colors">
+                        <div>
+                            <div class="font-semibold text-[15px]">MetrGrid</div>
+                            <div class="text-[12.5px] text-ink/50">For operators &amp; distributors</div>
+                        </div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-ink/40 group-hover:text-ember transition-colors"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="mt-8">
+                    <a href="https://selar.com/132c41s538" target="_blank" rel="noopener" class="btn btn-ember px-7 py-4 text-[15px]">
+                        Get the GM1000
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex flex-col items-center md:items-start">
-                <div class="text-xl font-black tracking-tighter mb-1">Burdva<span class="text-blue-600">.</span></div>
-                <p class="text-[10px] font-black uppercase tracking-widest text-gray-400">Smart Life.</p>
-            </div>
-            
-            <div class="flex gap-8 text-[11px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="/terms.html" class="hover:text-black transition-colors">Terms & Privacy</a>
-                <a href="#" class="hover:text-black transition-colors">Security</a>
+    <!-- ════════════════════ WHY BURDVA (dark) ════════════════════ -->
+    <section id="why" class="scroll-mt-24 relative px-5 sm:px-8 py-24 sm:py-32 bg-ink text-white overflow-hidden">
+        <!-- constellation motif -->
+        <svg class="absolute -bottom-24 -left-24 w-[560px] h-[560px] opacity-40 pointer-events-none" viewBox="0 0 600 600" fill="none">
+            <g stroke="#2563EB" stroke-width="1" stroke-opacity="0.6">
+                <path d="M300 120 L470 210 L455 410 L250 470 L150 300 Z"/>
+                <path d="M300 120 L455 410 M470 210 L250 470 M150 300 L470 210"/>
+            </g>
+            <g fill="#2563EB"><circle cx="300" cy="120" r="3"/><circle cx="470" cy="210" r="3"/><circle cx="455" cy="410" r="3"/><circle cx="250" cy="470" r="3"/><circle cx="150" cy="300" r="3"/></g>
+        </svg>
+
+        <div class="max-w-content mx-auto relative">
+            <div class="reveal max-w-2xl">
+                <p class="kicker text-blue mb-4">Why Burdva</p>
+                <h2 class="text-4xl sm:text-5xl font-bold leading-[1.06]">An engineering standard, not just a product.</h2>
+                <p class="mt-5 text-lg text-white/55 leading-relaxed">Whether it's rent moving between wallets or gas levels moving over the air, the same disciplines run through everything we ship.</p>
             </div>
 
-            <p class="text-[10px] font-bold text-gray-300">© 2025 Burdva Limited. All rights reserved.</p>
+            <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10">
+                <div class="reveal bg-ink p-7">
+                    <span class="kicker text-white/30">01</span>
+                    <div class="mt-5 text-blue"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
+                    <h3 class="font-display text-xl font-semibold mt-5">Hardware + software, one roof</h3>
+                    <p class="text-white/50 text-[14px] mt-2.5 leading-relaxed">We design the sensor and the dashboard, the wallet and the ledger — so they actually work together.</p>
+                </div>
+                <div class="reveal d1 bg-ink p-7">
+                    <span class="kicker text-white/30">02</span>
+                    <div class="mt-5 text-blue"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    <h3 class="font-display text-xl font-semibold mt-5">Financial-grade reliability</h3>
+                    <p class="text-white/50 text-[14px] mt-2.5 leading-relaxed">Atomic transactions, audit logs and signature-verified payments. Money never lands in a half-state.</p>
+                </div>
+                <div class="reveal d2 bg-ink p-7">
+                    <span class="kicker text-white/30">03</span>
+                    <div class="mt-5 text-blue"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3 8 4-16 3 8h4"/></svg></div>
+                    <h3 class="font-display text-xl font-semibold mt-5">Real-time by default</h3>
+                    <p class="text-white/50 text-[14px] mt-2.5 leading-relaxed">Live levels, live balances, live alerts. You see what's happening as it happens — not at month-end.</p>
+                </div>
+                <div class="reveal d3 bg-ink p-7">
+                    <span class="kicker text-white/30">04</span>
+                    <div class="mt-5 text-blue"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/></svg></div>
+                    <h3 class="font-display text-xl font-semibold mt-5">Engineered for Nigeria</h3>
+                    <p class="text-white/50 text-[14px] mt-2.5 leading-relaxed">Naira-native, Paystack-ready, built for Lagos realities — power, connectivity and all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════ ABOUT ════════════════════ -->
+    <section id="about" class="scroll-mt-24 px-5 sm:px-8 py-20 sm:py-28">
+        <div class="max-w-content mx-auto grid lg:grid-cols-12 gap-12 items-start">
+            <div class="reveal lg:col-span-7">
+                <p class="kicker text-ink/45 mb-4">The company</p>
+                <h2 class="text-4xl sm:text-5xl font-bold leading-[1.05]">Bridging the physical and the digital.</h2>
+                <div class="mt-7 space-y-5 text-lg text-ink/60 leading-relaxed max-w-2xl">
+                    <p class="text-ink">Burdva Limited is a registered Nigerian technology company building smart infrastructure that connects the physical world to intelligent software.</p>
+                    <p>We design and deploy IoT-powered systems and financial platforms for the things people depend on every day — homes, rent, energy and resources. Across both ventures, Burdva helps people and businesses reduce losses, improve visibility and operate more efficiently through real-time monitoring, predictive analytics and seamless digital workflows.</p>
+                </div>
+            </div>
+            <div class="reveal d1 lg:col-span-5 w-full">
+                <div class="rounded-3xl border border-ink/10 bg-[#FAFBFD] p-8">
+                    <div class="grid grid-cols-2 gap-y-8 gap-x-6">
+                        <div>
+                            <div class="font-display text-3xl font-bold">Lagos</div>
+                            <div class="text-[13px] text-ink/55 mt-1">Headquarters, Nigeria</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-3xl font-bold">2</div>
+                            <div class="text-[13px] text-ink/55 mt-1">Ventures · 4 products</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-3xl font-bold text-blue">Resida</div>
+                            <div class="text-[13px] text-ink/55 mt-1">Real estate OS</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-3xl font-bold text-ember">GM1000</div>
+                            <div class="text-[13px] text-ink/55 mt-1">Energy &amp; IoT</div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-ink/8 flex items-center justify-between">
+                        <span class="text-[13px] text-ink/55">Our promise</span>
+                        <span class="font-display font-semibold">Smart Life.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- marquee of capabilities -->
+        <div class="reveal mt-16 marquee-mask overflow-hidden border-y border-ink/8 py-5">
+            <div class="marquee text-ink/30 font-display text-lg font-medium">
+                <span>Wallets</span><span>•</span><span>Auto-rent</span><span>•</span><span>Shortlets</span><span>•</span><span>Handyman marketplace</span><span>•</span><span>Tank monitoring</span><span>•</span><span>Leak detection</span><span>•</span><span>Refill prediction</span><span>•</span><span>Agency CRM</span><span>•</span><span>Ad campaigns</span><span>•</span>
+                <span>Wallets</span><span>•</span><span>Auto-rent</span><span>•</span><span>Shortlets</span><span>•</span><span>Handyman marketplace</span><span>•</span><span>Tank monitoring</span><span>•</span><span>Leak detection</span><span>•</span><span>Refill prediction</span><span>•</span><span>Agency CRM</span><span>•</span><span>Ad campaigns</span><span>•</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════ CONTACT ════════════════════ -->
+    <section id="contact" class="scroll-mt-24 px-5 sm:px-8 pb-24">
+        <div class="max-w-content mx-auto rounded-[2rem] bg-[#FAFBFD] border border-ink/8 p-8 sm:p-12 lg:p-16">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+                <div class="reveal">
+                    <p class="kicker text-ink/45 mb-4">Get in touch</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold leading-[1.05]">Let's build something that works.</h2>
+                    <p class="mt-5 text-lg text-ink/60 leading-relaxed max-w-md">Buying a GM1000, deploying Resida across a portfolio, or partnering on infrastructure — we'd like to hear from you.</p>
+
+                    <div class="mt-10 space-y-3">
+                        <a href="mailto:technology@burdva.com" class="group flex items-center gap-4">
+                            <span class="h-11 w-11 rounded-xl bg-white border border-ink/8 flex items-center justify-center group-hover:bg-ink group-hover:text-white transition-all"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+                            <span><span class="block text-[11px] kicker text-ink/40">Email</span><span class="block font-semibold">technology@burdva.com</span></span>
+                        </a>
+                        <a href="https://wa.me/2348074566227" target="_blank" rel="noopener" class="group flex items-center gap-4">
+                            <span class="h-11 w-11 rounded-xl bg-white border border-ink/8 flex items-center justify-center group-hover:bg-ink group-hover:text-white transition-all"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.7-.84-2-.94-.27-.1-.47-.15-.66.15-.2.3-.76.93-.93 1.12-.17.2-.34.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.57-.48-.5-.66-.5l-.57-.01c-.2 0-.52.07-.8.37s-1.05 1.02-1.05 2.5 1.08 2.9 1.23 3.1c.15.2 2.12 3.25 5.15 4.55.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.27-.2-.57-.34zM12 2a10 10 0 0 0-8.6 15.05L2 22l5.08-1.33A10 10 0 1 0 12 2z"/></svg></span>
+                            <span><span class="block text-[11px] kicker text-ink/40">WhatsApp</span><span class="block font-semibold">+234 807 4566 227</span></span>
+                        </a>
+                        <div class="flex items-center gap-4">
+                            <span class="h-11 w-11 rounded-xl bg-white border border-ink/8 flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                            <span><span class="block text-[11px] kicker text-ink/40">Office</span><span class="block font-semibold">Lagos, Nigeria</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal d1">
+                    <form class="space-y-4" onsubmit="return handleSubmit(event)">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <input required type="text" placeholder="Full name" class="w-full px-5 py-3.5 rounded-xl border border-ink/12 bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/15 transition text-[15px]">
+                            <input required type="email" placeholder="Email" class="w-full px-5 py-3.5 rounded-xl border border-ink/12 bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/15 transition text-[15px]">
+                        </div>
+                        <select class="w-full px-5 py-3.5 rounded-xl border border-ink/12 bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/15 transition text-[15px] text-ink/80">
+                            <option>I'm interested in…</option>
+                            <option>Resida — for my properties</option>
+                            <option>GM1000 — energy monitoring</option>
+                            <option>Partnership / wholesale</option>
+                            <option>Something else</option>
+                        </select>
+                        <textarea required placeholder="Tell us a little about what you need" rows="4" class="w-full px-5 py-3.5 rounded-xl border border-ink/12 bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/15 transition text-[15px] resize-none"></textarea>
+                        <button type="submit" class="btn btn-ink w-full py-4 text-[15px]">Send message</button>
+                        <p class="text-[12px] text-ink/40 text-center">We typically reply within one business day.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════ FOOTER ════════════════════ -->
+    <footer class="px-5 sm:px-8 py-16 border-t border-ink/8">
+        <div class="max-w-content mx-auto">
+            <div class="grid md:grid-cols-12 gap-10">
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-[9px] bg-ink text-white font-display font-bold text-[17px] leading-none">b</span>
+                        <span class="font-display text-[21px] font-bold tracking-tight">Burdva</span>
+                    </div>
+                    <p class="mt-4 text-ink/55 text-[14.5px] leading-relaxed max-w-xs">Smart infrastructure connecting the physical world to intelligent software. Built in Lagos for the real world.</p>
+                    <p class="mt-5 kicker text-ink/35">Smart Life.</p>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h4 class="kicker text-ink/40 mb-4">Ventures</h4>
+                    <ul class="space-y-2.5 text-[14.5px] text-ink/65">
+                        <li><a href="#resida" class="hover:text-ink transition-colors">Resida</a></li>
+                        <li><a href="#gm1000" class="hover:text-ink transition-colors">GM1000</a></li>
+                        <li><a href="https://checkmygas.com" target="_blank" rel="noopener" class="hover:text-ink transition-colors">CheckMyGas ↗</a></li>
+                        <li><a href="https://app.metrgrid.com" target="_blank" rel="noopener" class="hover:text-ink transition-colors">MetrGrid ↗</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h4 class="kicker text-ink/40 mb-4">Company</h4>
+                    <ul class="space-y-2.5 text-[14.5px] text-ink/65">
+                        <li><a href="#about" class="hover:text-ink transition-colors">About</a></li>
+                        <li><a href="#why" class="hover:text-ink transition-colors">Why Burdva</a></li>
+                        <li><a href="#contact" class="hover:text-ink transition-colors">Contact</a></li>
+                        <li><a href="https://resida.app" target="_blank" rel="noopener" class="hover:text-ink transition-colors">resida.app ↗</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h4 class="kicker text-ink/40 mb-4">Legal</h4>
+                    <ul class="space-y-2.5 text-[14.5px] text-ink/65">
+                        <li><a href="/terms.html" class="hover:text-ink transition-colors">Terms &amp; Privacy</a></li>
+                        <li><a href="#" class="hover:text-ink transition-colors">Security</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h4 class="kicker text-ink/40 mb-4">Get started</h4>
+                    <a href="https://wa.me/2348074566227" target="_blank" rel="noopener" class="btn btn-ink px-5 py-3 w-full">WhatsApp us</a>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-8 border-t border-ink/8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-[13px] text-ink/45">© <span id="year">2026</span> Burdva Limited. All rights reserved.</p>
+                <p class="text-[13px] text-ink/45 mono">technology@burdva.com · Lagos, NG</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('glass-nav');
-                nav.classList.remove('py-5');
-                nav.classList.add('py-3');
-            } else {
-                nav.classList.remove('glass-nav');
-                nav.classList.add('py-5');
-                nav.classList.remove('py-3');
-            }
-        });
+        // Nav scroll state
+        const nav = document.getElementById('nav');
+        const onScroll = () => {
+            if (window.scrollY > 24) { nav.classList.add('nav-scrolled'); nav.classList.replace('py-5','py-3'); }
+            else { nav.classList.remove('nav-scrolled'); nav.classList.replace('py-3','py-5'); }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-        // Mobile menu toggle
+        // Mobile menu
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-                document.body.style.overflow = 'hidden';
-            } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-xmark');
-                document.body.style.overflow = 'auto';
-            }
+            const open = menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !open);
+            menu.classList.toggle('flex', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+            icon.innerHTML = open
+                ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+                : '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
         }
 
-        // Intersection Observer for scroll reveal
-        const observerOptions = {
-            threshold: 0.1
-        };
+        // Reveal on scroll
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.14 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+        // Footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // Contact form (demo handler — wire to backend / Formspree when ready)
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const original = btn.textContent;
+            btn.textContent = 'Sent ✓';
+            btn.style.background = '#2563EB';
+            e.target.reset();
+            setTimeout(() => { btn.textContent = original; btn.style.background = ''; }, 2600);
+            return false;
+        }
     </script>
 </body>
 </html>
